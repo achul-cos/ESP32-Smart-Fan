@@ -22,7 +22,7 @@
  | DHT22     |	GPIO 4 |	DHTPIN | Digital pin connected to the sensor data line |
  | Relay IN	 | GPIO 5 | RELAY_PIN |	Controls the fan/relay, Assumed Active-LOW (sending a LOW signal turns the fan ON) |
  
-![Schematic](https://github.com/user-attachments/assets/1874a6a8-2568-48d9-a23e-31627817c0cf)
+![Schematic](https://github.com/user-attachments/assets/96ddfe5b-2377-4707-8602-5fe86581b09f)
 
 # 📌Blynk Setup
 | Pin	| Usage |	Widget Type	| Data Type |	Purpose |
@@ -34,7 +34,7 @@
 | V4	| VIRTUAL_PIN_CONTROL_MODE	| Labeled Display |	String	| Display current Mode (Auto / Manual) |
 | V5 |	VIRTUAL_PIN_HUMIDITY	| Gauge / Display	| Float	| Display current Humidity (%) |
 
-<img width="1047" height="580" alt="1" src="https://github.com/user-attachments/assets/b0232f9e-304a-46dd-948c-7ef0e55ac09f" />
+<img width="1000" height="772" alt="1" src="https://github.com/user-attachments/assets/4a5749a5-6086-4acb-abd8-b63ee442fc21" />
 
 # 📂Software Setup
 ## Prerequisites
