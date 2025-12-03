@@ -31,8 +31,7 @@
 | V1	| VIRTUAL_PIN_FAN_STATUS	| Labeled Display	| String	| Display Fan Status (e.g., ON/OFF, Manual/Auto) |
 | V2	| VIRTUAL_PIN_THRESHOLD	| Slider	| Float	| Set Temperature Threshold for Automatic control |
 | V3	| VIRTUAL_PIN_FAN_MANUAL_SWITCH	| Switch / Button	| Integer |	Manual Fan Control Override Switch (0/1) |
-| V4	| VIRTUAL_PIN_CONTROL_MODE	| Labeled Display |	String	| Display current Mode (Auto / Manual) |
-| V5 |	VIRTUAL_PIN_HUMIDITY	| Gauge / Display	| Float	| Display current Humidity (%) |
+| V4 |	VIRTUAL_PIN_HUMIDITY	| Gauge / Display	| Float	| Display current Humidity (%) |
 
 <img width="1000" height="772" alt="1" src="https://github.com/user-attachments/assets/4a5749a5-6086-4acb-abd8-b63ee442fc21" />
 
