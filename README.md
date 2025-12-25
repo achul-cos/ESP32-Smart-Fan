@@ -1,221 +1,89 @@
-# 🖲️ESP32 Smart Fan Controller (Blynk & DHT22)
-> An IoT-enabled climate control system built on the ESP32 platform, utilizing the DHT22 temperature/humidity sensor and the Blynk cloud platform for remote monitoring and control.
+# 🌬️ ESP32-Smart-Fan - Control Your Fan Remotely
 
-# ✨Features
-- Temperature & Humidity Monitoring: Real-time data collection from a DHT22 sensor.
-- Automatic Control: The fan (connected via a relay) automatically turns ON when the ambient temperature exceeds a user-defined threshold.
-- Remote Threshold Setting: The temperature threshold can be dynamically adjusted via the Blynk app.
-- Manual Override: A switch in the Blynk app allows the user to manually force the fan ON or OFF, overriding the automatic control logic.
-- Status Display: Reports the current fan status (ON/OFF) and the active control mode (Auto/Manual) to the Blynk dashboard.
+## 📥 Download the Latest Version
+[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-Click%20Here-blue)](https://github.com/achul-cos/ESP32-Smart-Fan/releases)
 
-# 💾Hardware Requirements
-- Microcontroller: ESP32 Development Board (e.g., ESP32-WROOM-32)
-- Sensor: DHT22 (or AM2302) Temperature & Humidity Sensor
-- Actuator: 1-Channel Relay Module (Active-LOW assumed by the code)
-- Fan: (To be connected through the relay)
-- Power Supply: 5V Power Supply for the ESP32 and Relay
-- Wiring: Jumper Wires, Breadboard (optional)
+## 📖 Project Overview
+The ESP32-Smart-Fan project is a smart fan controller that leverages the ESP32 microcontroller. This system uses a DHT22 sensor to check temperature and humidity levels in your space. By connecting to the Blynk IoT platform, you can monitor and control your fan from anywhere using your smartphone. 
 
-# 📍Schematic & Pin Configuration
- | Component	| ESP32 Pin	| Variable/Constant |	Notes |
- |:---:      |:---:      |:---:              |:---  |
- | DHT22     |	GPIO 4 |	DHTPIN | Digital pin connected to the sensor data line |
- | Relay IN	 | GPIO 5 | RELAY_PIN |	Controls the fan/relay, Assumed Active-LOW (sending a LOW signal turns the fan ON) |
- 
-![Schematic](https://github.com/user-attachments/assets/96ddfe5b-2377-4707-8602-5fe86581b09f)
+The system offers two modes of operation:
+- **Automatic Mode**: The fan operates based on predefined temperature and humidity thresholds.
+- **Manual Mode**: You can override the automatic settings whenever you choose.
 
-# 📌Blynk Setup
-| Pin	| Usage |	Widget Type	| Data Type |	Purpose |
-| :---: | :---: | :---: | :---: | :---: |
-| V0 |	VIRTUAL_PIN_TEMP |	Gauge / Display |	Float |	Display current Temperature (°C) |
-| V1	| VIRTUAL_PIN_FAN_STATUS	| Labeled Display	| String	| Display Fan Status (e.g., ON/OFF, Manual/Auto) |
-| V2	| VIRTUAL_PIN_THRESHOLD	| Slider	| Float	| Set Temperature Threshold for Automatic control |
-| V3	| VIRTUAL_PIN_FAN_MANUAL_SWITCH	| Switch / Button	| Integer |	Manual Fan Control Override Switch (0/1) |
-| V4 |	VIRTUAL_PIN_HUMIDITY	| Gauge / Display	| Float	| Display current Humidity (%) |
+## 🛠️ Features
+- **Remote Control**: Manage your fan through the Blynk app.
+- **Temperature & Humidity Monitoring**: Keep track of ambient conditions.
+- **Customizable Settings**: Set your own thresholds for fan operation.
+- **User-Friendly Interface**: Easy setup with the Blynk IoT platform.
+- **Automatic and Manual Modes**: Choose how you want your fan to run.
 
-<img width="1000" height="772" alt="1" src="https://github.com/user-attachments/assets/4a5749a5-6086-4acb-abd8-b63ee442fc21" />
+## 📦 System Requirements
+- **Hardware**: ESP32 development board, DHT22 temperature and humidity sensor, relay module.
+- **Software**: Blynk app (available on iOS and Android).
+- **Network**: Wi-Fi connection to link the ESP32 and your smartphone.
 
-# 📂Software Setup
-## Prerequisites
-- Arduino IDE installed
-- ESP32 Board Support installed in the Arduino IDE (via Boards Manager)
-- Blynk Account and a new project/template created
-  
-## Library Installation
-> The following libraries must be installed via the Arduino Library Manager:
-- Blynk              : <BlynkSimpleEsp32.h>
-- Adafruit Sensor    : <Adafruit_Sensor.h>
-- DHT sensor library : <DHT.h> (Adafruit version)
-- WiFi library       : <WiFi.h> & <WiFiClient.h>
+## 🚀 Getting Started
+To set up the ESP32-Smart-Fan, follow these simple steps:
 
-## Code Configuration
-> Before uploading, modify the following lines in the code with your specific credentials :
-```ruby
-// --- BLYNK TEMPLATE ---
-#define BLYNK_TEMPLATE_ID   "TEMPLATE_ID"  // <-- REPLACE WITH YOUR TEMPLATE ID 
-#define BLYNK_TEMPLATE_NAME   "TEMPLATE_NAME" // <-- REPLACE WITH YOUR TEMPLATE NAME
+1. **Download the Software**:
+   Visit this page to download the latest version: [Download Latest Release](https://github.com/achul-cos/ESP32-Smart-Fan/releases).
 
-// --- AUTH & WIFI ---
-char auth[] = "YOUR_BLYNK_API"; // <-- REPLACE WITH YOUR AUTH TOKEN
-char ssid[] = "WiFi_NAME"; // <-- REPLACE WITH YOUR WIFI SSID
-char pass[] = "WiFi_PASSWORD"; // <-- REPLACE WITH YOUR WIFI PASSWORD
-```
-# 💻Control Logic 
-## Manual Override Check:
-  - If ```manual_fan_override``` is true (set by the V3 switch):
-  - The fan state is determined only by ```manual_fan_state```.
-  - The system displays Manual mode.
-## Automatic Mode:
-- If ```manual_fan_override``` is false (reset by adjusting the V2 slider):
-  - The system displays Auto mode
-- The fan is controlled by the temperature
-  - If Temperature $(t) \ge$ Threshold (temperature_threshold) :
-    - ```Fan ON (digitalWrite(RELAY_PIN, LOW))```
-  - If Temperature $(t) <$ Threshold :
-    - ```Fan OFF (digitalWrite(RELAY_PIN, HIGH))```
-# 🧑‍💻Program :
-```ruby
-#define BLYNK_TEMPLATE_ID   "TEMPLATE_ID"  // <-- REPLACE WITH YOUR TEMPLATE ID 
-#define BLYNK_TEMPLATE_NAME   "TEMPLATE_NAME" // <-- REPLACE WITH YOUR TEMPLATE NAME
-#define BLYNK_PRINT Serial
+2. **Install the Blynk App**:
+   Download the Blynk app from your device's app store. Create an account if you don't have one. 
 
-#include <WiFi.h>
-#include <WiFiClient.h>
-#include <BlynkSimpleEsp32.h>
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
+3. **Set Up the Hardware**:
+   - Connect the DHT22 sensor to your ESP32.
+   - Connect the relay module to the fan.
+   - Ensure all components are securely wired.
 
-// --- AUTH & WIFI ---
-char auth[] = "YOUR_BLYNK_API"; // <-- REPLACE WITH YOUR AUTH TOKEN
-char ssid[] = "WiFi_NAME"; // <-- REPLACE WITH YOUR WIFI SSID
-char pass[] = "WiFi_PASSWORD"; // <-- REPLACE WITH YOUR WIFI PASSWORD
+4. **Upload the Code**:
+   - Use the Arduino IDE to upload the code from the project.
+   - Modify the code with your Blynk authentication token.
 
-// --- PIN DEFINITIONS ---
-#define DHTPIN 4        // Digital pin connected to the DHT sensor
-#define RELAY_PIN 5     // Digital pin connected to the Relay's IN pin (Active-LOW assumed)
+5. **Connect to Wi-Fi**:
+   - Ensure you enter your Wi-Fi credentials in the code.
+   - Upload the modified code to the ESP32.
 
-// --- SENSOR SETUP ---
-#define DHTTYPE DHT22   // DHT 22 (AM2302)
-DHT dht(DHTPIN, DHTTYPE);
+6. **Power Up**:
+   - Turn on the power to the ESP32 and the connected fan.
 
-// --- VIRTUAL PINS ---
-#define VIRTUAL_PIN_TEMP V0             // Display Temperature (Float)
-#define VIRTUAL_PIN_FAN_STATUS V1       // Display Fan Status (String)
-#define VIRTUAL_PIN_THRESHOLD V2        // Temperature Threshold Slider (Float)
-#define VIRTUAL_PIN_FAN_MANUAL_SWITCH V3// Manual Fan Control Switch (Integer 0/1)
-#define VIRTUAL_PIN_CONTROL_MODE V4     // Display Auto/Manual Mode (String)
-#define VIRTUAL_PIN_HUMIDITY V5         // NEW: Display Humidity (Float)
+7. **Control Your Fan**:
+   - Open the Blynk app and start controlling your fan from anywhere.
 
-// --- VARIABLES & TIMER ---
-float temperature_threshold = 30; 
-BlynkTimer timer;
-bool manual_fan_override = false;
-bool manual_fan_state = false;    
+## 🌐 How to Use Blynk
+1. Open the Blynk app.
+2. Create a new project.
+3. Select the ESP32 as your device.
+4. Customize the widgets for temperature, humidity, and fan control.
+5. Use the app to check conditions or adjust fan settings.
 
-// --- BLYNK WRITE FUNCTIONS ---
+## 📥 Download & Install
+To get started with the ESP32-Smart-Fan, download the latest version [here](https://github.com/achul-cos/ESP32-Smart-Fan/releases). Make sure to follow all installation instructions carefully.
 
-// Function to handle data received from Blynk (Manual Switch V3)
-BLYNK_WRITE(VIRTUAL_PIN_FAN_MANUAL_SWITCH) {
-  int value = param.asInt();
+## 🔧 Troubleshooting
+If you encounter issues during setup or operation, consider the following tips:
+- **Check Connections**: Ensure all wires are properly connected.
+- **Wi-Fi Signal**: Make sure your ESP32 is in range of your Wi-Fi network.
+- **Code Errors**: Review the code for any typographical errors.
 
-  manual_fan_override = true; 
+## 🎯 Additional Resources
+- **Blynk Documentation**: Review Blynk's official documentation to explore features and tutorials.
+- **ESP32 Documentation**: Familiarize yourself with the ESP32 capabilities on the Espressif website.
 
-  if (value == 1) {
-    manual_fan_state = true;
-    digitalWrite(RELAY_PIN, LOW);
-    Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "ON (Manual)");
-    Blynk.virtualWrite(VIRTUAL_PIN_CONTROL_MODE, "Manual");
-    Serial.println("Manual Fan ON");
-  } else {
-    manual_fan_state = false;
-    digitalWrite(RELAY_PIN, HIGH);
-    Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "OFF (Manual)");
-    Blynk.virtualWrite(VIRTUAL_PIN_CONTROL_MODE, "Manual");
-    Serial.println("Manual Fan OFF");
-  }
-}
+## 📄 Topics
+This project covers various topics, including:
+- adafruit
+- arduino-ide
+- automation
+- blynk
+- blynk-iot-platform
+- c
+- dht
+- humidity-monitoring
+- iot
+- iot-application
+- relay
+- temperature-monitoring
+- wifi
 
-// Function to handle data received from Blynk (Temperature Threshold V2)
-BLYNK_WRITE(VIRTUAL_PIN_THRESHOLD) {
-  temperature_threshold = param.asFloat();
-  Serial.print("New Temperature Threshold: ");
-  Serial.println(temperature_threshold);
-
-  manual_fan_override = false;
-  Blynk.virtualWrite(VIRTUAL_PIN_CONTROL_MODE, "Auto");
-}
-
-// --- MAIN CONTROL FUNCTION ---
-
-void readAndControlFan() {
-  float h = dht.readHumidity(); // NEW: Read humidity
-  float t = dht.readTemperature(); 
-
-  // Check if any reads failed (for either T or H)
-  if (isnan(t) || isnan(h)) {
-    Serial.println("Failed to read from DHT sensor!");
-    Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "Sensor Error");
-    return;
-  }
-
-  // Send sensor data to Blynk
-  Blynk.virtualWrite(VIRTUAL_PIN_TEMP, t);
-  Blynk.virtualWrite(VIRTUAL_PIN_HUMIDITY, h); // NEW: Send humidity to V5
-
-  // Print to Serial Monitor for debugging
-  Serial.print("Temperature: ");
-  Serial.print(t);
-  Serial.print(" *C\tHumidity: ");
-  Serial.print(h);
-  Serial.println(" %");
-
-  // Control Logic: Check if in Manual or Auto Mode
-  if (manual_fan_override) {
-    // MANUAL MODE: Update status display
-    Blynk.virtualWrite(VIRTUAL_PIN_CONTROL_MODE, "Manual");
-    
-    // Ensure the status text matches the manual state
-    if (manual_fan_state) {
-        Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "ON (Manual)");
-    } else {
-        Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "OFF (Manual)");
-    }
-  } 
-  else {
-    // AUTOMATIC MODE: Control based on temperature threshold
-    Blynk.virtualWrite(VIRTUAL_PIN_CONTROL_MODE, "Auto");
-
-    if (t >= temperature_threshold) {
-      digitalWrite(RELAY_PIN, LOW); // Fan ON
-      Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "ON (Auto)");
-    } else {
-      digitalWrite(RELAY_PIN, HIGH); // Fan OFF
-      Blynk.virtualWrite(VIRTUAL_PIN_FAN_STATUS, "OFF (Auto)");
-    }
-  }
-}
-
-// --- ARDUINO SETUP & LOOP ---
-
-void setup() {
-  Serial.begin(115200);
-
-  // Initialize Relay Pin
-  pinMode(RELAY_PIN, OUTPUT);
-  digitalWrite(RELAY_PIN, HIGH); // Start with fan OFF (HIGH for Active-LOW relay)
-
-  // Initialize DHT sensor
-  dht.begin();
-
-  // Connect to Blynk
-  Blynk.begin(auth, ssid, pass);
-
-  // Setup function to run every 5000 milliseconds (5 seconds)
-  timer.setInterval(5000L, readAndControlFan);
-}
-
-void loop() {
-  Blynk.run();
-  timer.run();
-}
-```
+Feel free to explore these topics for a deeper understanding of IoT applications and smart home setups.
